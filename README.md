@@ -1,29 +1,13 @@
-# README #
+# vite-template-vanilla
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Very basic vanilla JS template. Comes with SASS and a sane folder structure.
 
-### What is this repository for? ###
+### Usage
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+```bash
+npx degit NicolasReibnitz/vite-template-vanilla my-project
+cd my-project
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+npm install
+npm run dev
+```

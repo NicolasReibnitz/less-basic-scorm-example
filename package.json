@@ -1,12 +1,13 @@
 {
-	"name": "scorm-example",
+	"name": "basic-scorm-example",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "vite build --force --emptyOutDir --watch",
+		"build": "vite build --force --emptyOutDir",
 		"dev": "vite --force",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"watch": "vite build --force --emptyOutDir --watch"
 	},
 	"dependencies": {
 		"pipwerks-scorm-api-wrapper": "^0.1.2"
