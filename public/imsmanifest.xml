@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<manifest identifier="simpleshowSCORM" version="1"
+	xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+	xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 schema/imscp_rootv1p1p2.xsd
+									http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 schema/imsmd_rootv1p2p1.xsd
+									http://www.adlnet.org/xsd/adlcp_rootv1p2 schema/adlcp_rootv1p2.xsd">
+	<metadata>
+		<schema>ADL SCORM</schema>
+		<schemaversion>1.2</schemaversion>
+		<!-- Added metadata extension to change the way the course gets launched in SCORM Cloud. -->
+		<!-- See here: https://support.scorm.com/hc/en-us/articles/206168646-Modifying-Package-Properties-Using-Manifest-Extensions -->
+		<adlcp:location>schema/course_metadata.xml</adlcp:location>
+	</metadata>
+	<organizations default="simpleshow">
+		<organization identifier="simpleshow">
+			<title>SCORM v1.2 Example Course</title>
+			<item identifier="i1" identifierref="r1" isvisible="true">
+				<title>SCORM v1.2 Example Course</title>
+			</item>
+		</organization>
+	</organizations>
+	<resources>
+		<resource identifier="r1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+			<file href="./assets/index.css" />
+			<file href="./assets/index.js" />
+			<file href="./assets/javascript.svg" />
+			<file href="./assets/vite.svg" />
+			<file href="./imsmanifest.xml" />
+			<file href="./index.html" />
+			<file href="./schema/adlcp_rootv1p2.xsd" />
+			<file href="./schema/course_metadata.xml" />
+			<file href="./schema/HSTMConfiguration.xsd" />
+			<file href="./schema/HSTMConfiguration.xsx" />
+			<file href="./schema/imscp_rootv1p1p2.xsd" />
+			<file href="./schema/imsmd_rootv1p2p1.xsd" />
+			<file href="./schema/ims_xml.xsd" />
+		</resource>
+	</resources>
+</manifest>
