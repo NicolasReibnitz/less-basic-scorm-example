@@ -5,7 +5,7 @@ import siLog from './logger.js';
 
 let lmsConnected = false;
 let unloaded = false;
-const debug = true;
+const debug = false;
 
 /**
  * Tries to connect to the LMS using the pipwerks helper function SCORM.init().

@@ -24,7 +24,7 @@
 		<resource identifier="r1" type="webcontent" adlcp:scormtype="sco" href="index.html">
 			<file href="./assets/index.css" />
 			<file href="./assets/index.js" />
-			<file href="./assets/javascript.svg" />
+			<file href="./assets/video.mp4" />
 			<file href="./assets/vite.svg" />
 			<file href="./imsmanifest.xml" />
 			<file href="./index.html" />
