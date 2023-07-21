@@ -1,11 +1,8 @@
-import { setStatusInfo } from './ignore-me.js';
 import simpleScorm from './simple-scorm.js';
 
 const LMSConnected = simpleScorm.getStarted();
 
 const video = document.getElementById('the-video');
-const btnExit = document.getElementById('btn-exit');
-const btnBookmark = document.getElementById('btn-bookmark');
 
 if (LMSConnected) {
 	window.addEventListener('beforeunload', windowUnloadHandler);
@@ -14,10 +11,6 @@ if (LMSConnected) {
 	setVideoTime(simpleScorm.getLocation());
 }
 
-btnExit.addEventListener('click', () => simpleScorm.quit());
-btnBookmark.addEventListener('click', () => simpleScorm.setLocation(video.currentTime));
-video.addEventListener('loadedmetadata', () => videoLoadedHandler());
-video.addEventListener('timeupdate', () => videoTimeUpdateHandler());
 video.addEventListener('ended', () => videoEndedHandler());
 
 function windowUnloadHandler() {
@@ -28,15 +21,6 @@ function windowUnloadHandler() {
 
 function videoEndedHandler() {
 	simpleScorm.setCompleted();
-}
-
-function videoLoadedHandler() {
-	video.addEventListener('timeupdate', () => videoTimeUpdateHandler());
-	setStatusInfo(LMSConnected, calcScore);
-}
-
-function videoTimeUpdateHandler() {
-	setStatusInfo(LMSConnected, calcScore);
 }
 
 function setVideoTime(value) {
@@ -51,5 +35,3 @@ function calcScore() {
 	const score = Math.round((time / duration) * 100);
 	return score;
 }
-
-setStatusInfo(LMSConnected, calcScore);

@@ -14,9 +14,9 @@
 	</metadata>
 	<organizations default="simpleshow">
 		<organization identifier="simpleshow">
-			<title>SCORM v1.2 Example Course</title>
+			<title>simpleshow video maker SCORM package</title>
 			<item identifier="i1" identifierref="r1" isvisible="true">
-				<title>SCORM v1.2 Example Course</title>
+				<title>simpleshow video maker SCORM package</title>
 			</item>
 		</organization>
 	</organizations>
@@ -25,16 +25,12 @@
 			<file href="./assets/index.css" />
 			<file href="./assets/index.js" />
 			<file href="./assets/video.mp4" />
-			<file href="./assets/vite.svg" />
-			<file href="./imsmanifest.xml" />
+			<file href="./favicon.ico" />
+			<file href="./icons/favicon-128x128.png" />
+			<file href="./icons/favicon-16x16.png" />
+			<file href="./icons/favicon-32x32.png" />
+			<file href="./icons/favicon-96x96.png" />
 			<file href="./index.html" />
-			<file href="./schema/adlcp_rootv1p2.xsd" />
-			<file href="./schema/course_metadata.xml" />
-			<file href="./schema/HSTMConfiguration.xsd" />
-			<file href="./schema/HSTMConfiguration.xsx" />
-			<file href="./schema/imscp_rootv1p1p2.xsd" />
-			<file href="./schema/imsmd_rootv1p2p1.xsd" />
-			<file href="./schema/ims_xml.xsd" />
 		</resource>
 	</resources>
 </manifest>

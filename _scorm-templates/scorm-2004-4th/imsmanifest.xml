@@ -1,0 +1,41 @@
+<?xml version="1.0" standalone="no" ?>
+<manifest identifier="simpleshowSCORM" version="1"
+	xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+	xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
+	xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3"
+	xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3"
+	xmlns:imsss="http://www.imsglobal.org/xsd/imsss"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 schema/imscp_v1p1.xsd
+									http://www.adlnet.org/xsd/adlcp_v1p3 schema/adlcp_v1p3.xsd
+									http://www.adlnet.org/xsd/adlseq_v1p3 schema/adlseq_v1p3.xsd
+									http://www.adlnet.org/xsd/adlnav_v1p3 schema/adlnav_v1p3.xsd
+									http://www.imsglobal.org/xsd/imsss schema/imsss_v1p0.xsd">
+	<metadata>
+		<schema>ADL SCORM</schema>
+		<schemaversion>2004 4th Edition</schemaversion>
+		<!-- Added metadata extension to change the way the course gets launched in SCORM Cloud. -->
+		<!-- See here: https://support.scorm.com/hc/en-us/articles/206168646-Modifying-Package-Properties-Using-Manifest-Extensions -->
+		<adlcp:location>schema/course_metadata.xml</adlcp:location>
+	</metadata>
+	<organizations default="simpleshow">
+		<organization identifier="simpleshow" adlseq:objectivesGlobalToSystem="false">
+			<title>simpleshow video maker SCORM package</title>
+			<item identifier="i1" identifierref="r1" isvisible="true">
+				<title>simpleshow video maker SCORM package</title>
+			</item>
+		</organization>
+	</organizations>
+	<resources>
+		<resource identifier="r1" type="webcontent" adlcp:scormType="sco" href="index.html">
+			<file href="./assets/index.css" />
+			<file href="./assets/index.js" />
+			<file href="./assets/video.mp4" />
+			<file href="./favicon.ico" />
+			<file href="./icons/favicon-128x128.png" />
+			<file href="./icons/favicon-16x16.png" />
+			<file href="./icons/favicon-32x32.png" />
+			<file href="./icons/favicon-96x96.png" />
+			<file href="./index.html" />
+		</resource>
+	</resources>
+</manifest>

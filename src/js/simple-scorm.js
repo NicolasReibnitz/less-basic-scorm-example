@@ -6,6 +6,7 @@ import siLog from './logger.js';
 let lmsConnected = false;
 let unloaded = false;
 const debug = false;
+window.SCORM = SCORM;
 
 /**
  * Tries to connect to the LMS using the pipwerks helper function SCORM.init().
@@ -52,9 +53,16 @@ function unloadHandler() {
  */
 function setScore(value) {
 	siLog('SCORM', 'INFO', 'setScore...', value);
-	SCORM.set('cmi.core.score.raw', value);
-	SCORM.set('cmi.core.score.max', 100);
-	SCORM.set('cmi.core.score.min', 0);
+	if (SCORM.version === '2004') {
+		SCORM.set('cmi.score.raw', value);
+		SCORM.set('cmi.score.scaled', value / 100);
+		SCORM.set('cmi.score.max', 100);
+		SCORM.set('cmi.score.min', 0);
+	} else {
+		SCORM.set('cmi.core.score.raw', value);
+		SCORM.set('cmi.core.score.max', 100);
+		SCORM.set('cmi.core.score.min', 0);
+	}
 	SCORM.save();
 }
 
@@ -64,10 +72,18 @@ function setScore(value) {
  * @returns {number|null} The score/progress (as integer from 0 to 100) or null
  */
 function getScore() {
-	let score = SCORM.get('cmi.core.score.raw');
+	let score;
+
+	if (SCORM.version === '2004') {
+		score = SCORM.get('cmi.score.raw');
+	} else {
+		score = SCORM.get('cmi.core.score.raw');
+	}
+
 	if (debug) {
 		score = '42';
 	}
+
 	siLog('SCORM', 'INFO', 'getScore...', score);
 
 	if (!score || score === 'null' || score === 'undefined') {
@@ -88,7 +104,11 @@ function getScore() {
  */
 function setLocation(value) {
 	siLog('SCORM', 'INFO', 'setLocation...', value);
-	SCORM.set('cmi.core.lesson_location', value);
+	if (SCORM.version === '2004') {
+		SCORM.set('cmi.location', value);
+	} else {
+		SCORM.set('cmi.core.lesson_location', value);
+	}
 	SCORM.save();
 }
 
@@ -99,12 +119,20 @@ function setLocation(value) {
  * @returns {number|null} The location/bookmark (as float from 0 to 100) or null
  */
 function getLocation() {
-	let location = SCORM.get('cmi.core.lesson_location');
+	let location;
+
+	if (SCORM.version === '2004') {
+		location = SCORM.get('cmi.location');
+	} else {
+		location = SCORM.get('cmi.core.lesson_location');
+	}
+
 	if (debug) {
 		location = '26.140844';
 	}
 
 	siLog('SCORM', 'INFO', 'getLocation...', location);
+
 	if (!location || location === 'null' || location === 'undefined') {
 		location = null;
 	} else {
@@ -119,7 +147,14 @@ function getLocation() {
  */
 function setCompleted() {
 	siLog('SCORM', 'INFO', 'setCompleted...');
-	SCORM.set('cmi.core.lesson_status', 'completed');
+
+	if (SCORM.version === '2004') {
+		SCORM.set('cmi.completion_status', 'completed');
+		SCORM.set('cmi.success_status', 'passed');
+	} else {
+		SCORM.set('cmi.core.lesson_status', 'completed');
+	}
+
 	SCORM.save();
 }
 
