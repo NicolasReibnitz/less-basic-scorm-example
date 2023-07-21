@@ -6,7 +6,6 @@ import siLog from './logger.js';
 let lmsConnected = false;
 let unloaded = false;
 const debug = false;
-window.SCORM = SCORM;
 
 /**
  * Tries to connect to the LMS using the pipwerks helper function SCORM.init().
@@ -38,11 +37,7 @@ function getStarted() {
  */
 function unloadHandler() {
 	siLog('SCORM', 'INFO', 'Setting unloadHandler...');
-	if (lmsConnected && !unloaded) {
-		unloaded = true;
-		SCORM.save(); // save all data that has already been sent
-		SCORM.quit(); // close the SCORM API connection properly
-	}
+	quit();
 }
 
 /**
@@ -128,7 +123,7 @@ function getLocation() {
 	}
 
 	if (debug) {
-		location = '26.140844';
+		location = '3';
 	}
 
 	siLog('SCORM', 'INFO', 'getLocation...', location);
@@ -163,7 +158,56 @@ function setCompleted() {
  */
 function quit() {
 	siLog('SCORM', 'INFO', 'quit...');
-	SCORM.quit();
+	if (lmsConnected && !unloaded) {
+		unloaded = true;
+
+		SCORM.save(); // save all data that has already been sent
+
+		if (isSuccessFactorsLMS()) successFactorsPatch(); // workaround for SuccessFactors LMS
+
+		SCORM.quit(); // close the SCORM API connection properly
+	}
+}
+
+/**
+ * This is a workaround for the SuccessFactors LMS.
+ * It sets the exit value to an empty string if the course is completed or passed.
+ * Using the standard exit value 'logout' causes the LMS to actually log the user out.
+ * This is not what we want of course.
+ */
+function successFactorsPatch() {
+	siLog('SCORM', 'INFO', 'SuccessFactors/Plateau LMS found. Setting exit to normal.');
+
+	SCORM.handleExitMode = false; // disable the default exit handler
+
+	if (SCORM.data.completionStatus !== 'completed' && SCORM.data.completionStatus !== 'passed') {
+		switch (SCORM.version) {
+			case '1.2':
+				SCORM.set('cmi.core.exit', 'suspend');
+				break;
+			case '2004':
+				SCORM.set('cmi.exit', 'suspend');
+				break;
+		}
+	} else {
+		switch (SCORM.version) {
+			case '1.2':
+				SCORM.set('cmi.core.exit', '');
+				break;
+			case '2004':
+				SCORM.set('cmi.exit', 'normal');
+				break;
+		}
+	}
+}
+
+/**
+ * Checks if the current page is hosted on the SuccessFactors LMS.
+ *
+ * @returns {boolean} If the current page is hosted on the SuccessFactors LMS or not.
+ */
+function isSuccessFactorsLMS() {
+	return window.location.href.toLowerCase().indexOf('plateau.com') > -1;
 }
 
 /**
